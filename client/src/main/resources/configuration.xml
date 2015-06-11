@@ -35,28 +35,21 @@
 
     <!-- message convert -->
     <bean id="jsonConverterWithDefaultType"
-          class="org.springframework.amqp.support.converter.JsonMessageConverter">
+          class="org.springframework.amqp.support.converter.SimpleMessageConverter">
     </bean>
 
     <!-- consumer service -->
-    <bean name="serverHandler" class="com.baidu.pikaq.demo.origin.consumer.service.ServerHandler">
+    <bean name="serverHandler" class="com.github.knightliao.consumer.service.ServerHandler">
     </bean>
 
     <!-- queue -->
-    <rabbit:queue id="pikaQDemoLogMessageQueue" name="pikaQDemoQueue"/>
+    <rabbit:queue id="queue" name="${queue}"/>
 
     <!-- listener container -->
     <listener-container concurrency="5" connection-factory="connectionFactory"
                         message-converter="jsonConverterWithDefaultType"
                         xmlns="http://www.springframework.org/schema/rabbit">
-        <listener ref="serverHandler" method="handleMessage" queues="pikaQDemoLogMessageQueue"/>
+        <listener ref="serverHandler" method="handleMessage" queues="queue"/>
     </listener-container>
-
-    <!-- exchange -->
-    <rabbit:topic-exchange name="pikaQDemoExchange">
-        <rabbit:bindings>
-            <rabbit:binding queue="pikaQDemoLogMessageQueue" pattern="logMessageInfo.*"/>
-        </rabbit:bindings>
-    </rabbit:topic-exchange>
 
 </beans>
