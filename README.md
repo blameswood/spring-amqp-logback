@@ -5,19 +5,29 @@ Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化�
 
 ### 发布消息 usage
 
+#### rabbit.properties
+
+    host=127.0.0.1
+    port=5672
+    username=root
+    password=123456
+    
+    routingKeyPattern=test
+    exchangeName=logs
+
 #### logback.xml 
 
     <appender name="AMQP" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
         <layout>
-            <pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
+            <pattern>%X{sessionId} %date [%thread] %-5level %logger{80} - %msg%n</pattern>
         </layout>
 
-        <host>127.0.0.1</host>
-        <port>5672</port>
-        <username>root</username>
-        <password>123456</password>
-        <routingKeyPattern>test</routingKeyPattern>
-        <exchangeName>logs</exchangeName>
+        <host>${host}</host>
+        <port>${port}</port>
+        <username>${username}</username>
+        <password>${password}</password>
+        <routingKeyPattern>${routingKeyPattern}</routingKeyPattern>
+        <exchangeName>${exchangeName}</exchangeName>
 
         <declareExchange>true</declareExchange>
         <generateId>true</generateId>
@@ -25,6 +35,11 @@ Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化�
         <durable>true</durable>
         <deliveryMode>PERSISTENT</deliveryMode>
     </appender>
+    
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="AMQP"/>
+    </root>
     
 #### pom
 
