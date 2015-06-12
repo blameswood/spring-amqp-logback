@@ -1,5 +1,5 @@
 # spring-amqp-logback
-Best practice for logging with AMQP+LOGBACK 
+Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化存储你的业务日志）
 
 包含 日志发布端 和 日志接收端 两个最佳实践例子。
 
@@ -71,7 +71,10 @@ sh start.sh
             - .....
         - 201507
         - ........
-            
+        
+#### 出错处理
+
+查看 logs/amqp_client_log4j.log 查看问题
 
 ### 依赖jar包
 
