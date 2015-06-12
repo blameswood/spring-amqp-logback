@@ -1,7 +1,7 @@
 # spring-amqp-logback
 Best practice for logging with AMQP+LOGBACK 
 
-包含两个最佳实践例子。
+包含 日志发布端 和 日志接收端 两个最佳实践例子。
 
 ### 发布消息 usage
 
