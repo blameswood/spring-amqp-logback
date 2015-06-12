@@ -121,13 +121,7 @@ sh start.sh
 
 ### 第四步：关闭程序
 
-通过  
-
-    ps aux | grep ampq-logback-client
-
-找到pid
-
-然后kill掉
+sh stop.sh
 
 ### 生成日志格式
     
