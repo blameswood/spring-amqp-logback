@@ -5,6 +5,8 @@ Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化�
 
 ### 发布消息 usage
 
+#### logback.xml 
+
     <appender name="AMQP" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
         <layout>
             <pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
@@ -23,6 +25,50 @@ Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化�
         <durable>true</durable>
         <deliveryMode>PERSISTENT</deliveryMode>
     </appender>
+    
+#### pom
+
+    <properties>
+        <spring.amqp.version>1.4.5.RELEASE</spring.amqp.version>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-amqp</artifactId>
+            <version>${spring.amqp.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <version>${spring.amqp.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-messaging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-tx</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 
 ### 消费消息 client jar 
 
@@ -41,10 +87,10 @@ Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化�
     
 #### 第二步：修改 mq配置
 
-    host=10.46.152.32
-    port=8092
+    host=127.0.0.1
+    port=5673
     username=root
-    password=MhxzKhl
+    password=123456
     
     queue=testLog
 
