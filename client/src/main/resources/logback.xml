@@ -2,7 +2,8 @@
 
 <configuration>
 
-    <property name="log.base" value="./log/amqp"/>
+    <property name="log.dir" value="./log"/>
+    <property name="log.name" value="amqp"/>
 
     <jmxConfigurator/>
 
@@ -13,9 +14,9 @@
     </appender>
 
     <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${log.base}.log</File>
+        <File>${log.dir}/${log.name}.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>%d{yyyyMM}/${log.base}.%d{yyyyMMdd}.log</FileNamePattern>
+            <FileNamePattern>${log.dir}/%d{yyyy-MM,aux}/${log.name}.%d.log</FileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>%msg</pattern>
