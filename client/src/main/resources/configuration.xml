@@ -16,7 +16,7 @@
         <property name="ignoreUnresolvablePlaceholders" value="false"/>
         <property name="locations">
             <list>
-                <value>mq-inner.properties</value>
+                <value>file:mq.properties</value>
             </list>
         </property>
     </bean>
