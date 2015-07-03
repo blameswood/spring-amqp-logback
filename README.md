@@ -137,10 +137,6 @@ sh stop.sh
 
 查看 logs/amqp_client_log4j.log 查看问题
 
-## 联系·讨论
-
-java技术QQ群：68373211
-
 ## 依赖jar包
 
     [INFO] com.github.knightliao.logback:ampq-logback-client:jar:0.0.1-SNAPSHOT
@@ -165,3 +161,7 @@ java技术QQ群：68373211
     [INFO] +- ch.qos.logback:logback-core:jar:1.0.9:compile
     [INFO] +- ch.qos.logback:logback-classic:jar:1.0.9:compile
     [INFO] \- log4j:log4j:jar:1.2.15:compile
+    
+## 联系·讨论
+
+java技术QQ群：68373211
