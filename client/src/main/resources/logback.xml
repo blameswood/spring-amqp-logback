@@ -24,11 +24,11 @@
     </appender>
 
     <logger name="com.github.knightliao">
-        <level value="INFO"/>
+        <level value="DEBUG"/>
     </logger>
 
     <root>
-        <level value="INFO"/>
+        <level value="DEBUG"/>
         <appender-ref ref="stdout"/>
         <appender-ref ref="logfile"/>
     </root>
