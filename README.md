@@ -1,7 +1,8 @@
-# spring-amqp-logback
-Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化存储你的业务日志）
+# spring-amqp-logback/log4j
 
-包含 日志发布端 和 日志接收端 两个最佳实践例子。
+Best practice for logging with AMQP+LOGBACK/log4j (使用Rabbitmq+logback/log4j来中心化存储你的业务日志）
+
+包含 日志发布端(logback and log4j) 和 日志接收端 两个最佳实践例子。
 
 ## 发布消息 usage
 
@@ -9,7 +10,9 @@ Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化�
 
 ### USE JAVA 
 
-#### rabbit.properties
+#### 使用logback
+
+##### rabbit.properties
 
     host=127.0.0.1
     port=5672
@@ -19,7 +22,7 @@ Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化�
     routingKeyPattern=test
     exchangeName=logs
 
-#### logback.xml 
+##### logback.xml 
 
     <appender name="AMQP" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
         <layout>
@@ -45,7 +48,7 @@ Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化�
         <appender-ref ref="AMQP"/>
     </root>
     
-#### pom
+##### pom
 
     <properties>
         <spring.amqp.version>1.4.5.RELEASE</spring.amqp.version>
@@ -88,6 +91,42 @@ Best practice for logging with AMQP+LOGBACK (使用Rabbitmq+logback来中心化�
             </exclusions>
         </dependency>
     </dependencies>
+
+#### 使用log4j
+
+##### log4j.properites 
+
+    # AMQP log4j appender for application A
+    
+    log4j.appender.amqp=org.springframework.amqp.rabbit.log4j.AmqpAppender
+    log4j.appender.amqp.layout=org.apache.log4j.PatternLayout
+    log4j.appender.amqp.layout.ConversionPattern=%d [%t] %-5p %-17c{2} (%13F:%L) %3x - %m%n
+    
+    #-------------------------------
+    ## Connection settings
+    #-------------------------------
+    log4j.appender.amqp.host=
+    log4j.appender.amqp.port=
+    log4j.appender.amqp.username=
+    log4j.appender.amqp.password=
+    log4j.appender.amqp.virtualHost=/
+    #log4j.appender.amqp.connectionTimeout=0 # No setter for connection timeout.
+    #-------------------------------
+    ## Exchange name and type
+    #-------------------------------
+    log4j.appender.amqp.exchangeName=
+    log4j.appender.amqp.exchangeType=
+    #-------------------------------
+    ## Log4J-format pattern to use to create a routing key.
+    ## The application id is available as %X{applicationId}.
+    #-------------------------------
+    log4j.appender.amqp.routingKeyPattern=
+    
+    log4j.category.org.springframework.amqp.rabbit.log4j=DEBUG, amqp
+
+##### pom
+
+同上
 
 ## 消费消息
 
@@ -161,7 +200,9 @@ sh stop.sh
     [INFO] +- ch.qos.logback:logback-core:jar:1.0.9:compile
     [INFO] +- ch.qos.logback:logback-classic:jar:1.0.9:compile
     [INFO] \- log4j:log4j:jar:1.2.15:compile
-    
+
+
+
 ## 联系·讨论
 
 java技术QQ群：68373211
