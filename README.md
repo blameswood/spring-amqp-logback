@@ -153,6 +153,7 @@ Best practice for logging with AMQP+LOGBACK/log4j (使用Rabbitmq+logback/log4j�
     password=123456
     
     queue=testLog
+    vhost=/
 
 ### 第三步：启动程序
 
